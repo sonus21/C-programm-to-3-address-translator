@@ -66,10 +66,6 @@ $ cd C-programm-to-3-address-translator<br/>
 # Support
 Please report problems and bugs to  [trans](https://github.com/sonus21/C-programm-to-3-address-translator/issues) issue tracker.
 
-or 
-
-You can send mail to gitsonus21@gmail.com .
-
 # License
 The content of this project  is licensed under the
 [Creative Commons Attribution 3.0 license](http://creativecommons.org/licenses/by/3.0/us/deed.en_US)
