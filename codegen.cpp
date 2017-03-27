@@ -9,7 +9,7 @@
 #include "codegen.h"
 #include "backpatch.cpp"
 #include "stable.cpp"
-extern Quadruple tuple[5000];
+extern Quadruple quadruple[5000];
 /**
     generate new temporary variable name
     @param void None
@@ -32,41 +32,41 @@ void printCode(){
 	for(int i=0;i<nextInstr-1;i++){
 	     printf("\n");
 	     fprintf(file,"\n");
-        if(!strcmp(tuple[i].result,"if")){
-            printf("%.4d : %s\t%s\t%s\t%s\t%s\t%.4d",i,tuple[i].result,tuple[i].addr1,tuple[i].op,tuple[i].addr2,tuple[i].addr3,tuple[i].label);
-            fprintf(file,"%.4d : %s\t%s\t%s\t%s\t%s\t%.4d",i,tuple[i].result,tuple[i].addr1,tuple[i].op,tuple[i].addr2,tuple[i].addr3,tuple[i].label);
+        if(!strcmp(quadruple[i].result,"if")){
+            printf("%.4d : %s\t%s\t%s\t%s\t%s\t%.4d",i,quadruple[i].result,quadruple[i].addr1,quadruple[i].op,quadruple[i].addr2,quadruple[i].addr3,quadruple[i].label);
+            fprintf(file,"%.4d : %s\t%s\t%s\t%s\t%s\t%.4d",i,quadruple[i].result,quadruple[i].addr1,quadruple[i].op,quadruple[i].addr2,quadruple[i].addr3,quadruple[i].label);
             continue;
         }
-        if(!strcmp("goto",tuple[i].result)){
-             printf("%.4d : %s\t%.4d",i,tuple[i].result,tuple[i].label);
-             fprintf(file,"%.4d : %s\t%.4d",i,tuple[i].result,tuple[i].label);
+        if(!strcmp("goto",quadruple[i].result)){
+             printf("%.4d : %s\t%.4d",i,quadruple[i].result,quadruple[i].label);
+             fprintf(file,"%.4d : %s\t%.4d",i,quadruple[i].result,quadruple[i].label);
         }
 	    else{
-            printf("%.4d : %s\t=\t%s",i,tuple[i].result,tuple[i].addr1);
-            fprintf(file,"%.4d : %s\t=\t%s",i,tuple[i].result,tuple[i].addr1);
-            if(tuple[i].op!=NULL){
-                printf("\t%s",tuple[i].op);
-                fprintf(file,"\t%s",tuple[i].op);
+            printf("%.4d : %s\t=\t%s",i,quadruple[i].result,quadruple[i].addr1);
+            fprintf(file,"%.4d : %s\t=\t%s",i,quadruple[i].result,quadruple[i].addr1);
+            if(quadruple[i].op!=NULL){
+                printf("\t%s",quadruple[i].op);
+                fprintf(file,"\t%s",quadruple[i].op);
             }
             else continue;
-            if(tuple[i].addr2!=NULL){
-                printf("\t%s",tuple[i].addr2);
-                fprintf(file,"\t%s",tuple[i].addr2);
+            if(quadruple[i].addr2!=NULL){
+                printf("\t%s",quadruple[i].addr2);
+                fprintf(file,"\t%s",quadruple[i].addr2);
             }
             else continue;
-            if(tuple[i].addr3!=NULL){
-                printf("\t%s",tuple[i].addr3);
-                fprintf(file,"\t%s",tuple[i].addr3);
+            if(quadruple[i].addr3!=NULL){
+                printf("\t%s",quadruple[i].addr3);
+                fprintf(file,"\t%s",quadruple[i].addr3);
             }
             else continue;
-            if(tuple[i].label!=0){
-                printf("\t%d",tuple[i].label);
-                fprintf(file,"\t%d",tuple[i].label);
+            if(quadruple[i].label!=0){
+                printf("\t%d",quadruple[i].label);
+                fprintf(file,"\t%d",quadruple[i].label);
             }
 	    }
 	}
-	 printf("\n%.4d : %s\n",nextInstr-1,tuple[nextInstr-1].result);
-	 fprintf(file,"\n%.4d : %s\n",nextInstr-1,tuple[nextInstr-1].result);
+	 printf("\n%.4d : %s\n",nextInstr-1,quadruple[nextInstr-1].result);
+	 fprintf(file,"\n%.4d : %s\n",nextInstr-1,quadruple[nextInstr-1].result);
 	 fclose(file);
 	 printf("\nNote: Output is also available in file with name 'output.txt'\n\n");
 }
@@ -80,12 +80,12 @@ void printCode(){
     @return void None
 */
 void genCode(const char *result,const char*addr1,const char *op,const char *addr2){
-        tuple[nextInstr].result=(char*)result;
-		tuple[nextInstr].addr1=(char*)addr1;
-        tuple[nextInstr].op=(char*)op;
-		tuple[nextInstr].addr2=(char*)addr2;
-		tuple[nextInstr].addr3=NULL;
-		tuple[nextInstr].label=0;
+        quadruple[nextInstr].result=(char*)result;
+		quadruple[nextInstr].addr1=(char*)addr1;
+        quadruple[nextInstr].op=(char*)op;
+		quadruple[nextInstr].addr2=(char*)addr2;
+		quadruple[nextInstr].addr3=NULL;
+		quadruple[nextInstr].label=0;
 		nextInstr++;
 }
 /**
@@ -97,12 +97,12 @@ void genCode(const char *result,const char*addr1,const char *op,const char *addr
     @return void None
 */
 void genCode(const char *result,const char *unop,const char*addr1){
-        tuple[nextInstr].result=(char*)result;
-		tuple[nextInstr].addr1=NULL;
-        tuple[nextInstr].op=(char*)unop;
-		tuple[nextInstr].addr2=(char*)addr1;
-		tuple[nextInstr].addr3=NULL;
-		tuple[nextInstr].label=0;
+        quadruple[nextInstr].result=(char*)result;
+		quadruple[nextInstr].addr1=NULL;
+        quadruple[nextInstr].op=(char*)unop;
+		quadruple[nextInstr].addr2=(char*)addr1;
+		quadruple[nextInstr].addr3=NULL;
+		quadruple[nextInstr].label=0;
 		nextInstr++;
 }
 /**
@@ -117,12 +117,12 @@ void genCode(const char *result,const char *unop,const char*addr1){
 */
 void genCode(const char*result,const char *addr1,const char *op,const char *addr2,const char *addr3,int label){
 
-		tuple[nextInstr].result=(char*)result;
-		tuple[nextInstr].addr1=(char*)addr1;
-		tuple[nextInstr].op=(char*)op;
-		tuple[nextInstr].addr2=(char*)addr2;
-		tuple[nextInstr].addr3=(char*)addr3;
-		tuple[nextInstr].label=label;
+		quadruple[nextInstr].result=(char*)result;
+		quadruple[nextInstr].addr1=(char*)addr1;
+		quadruple[nextInstr].op=(char*)op;
+		quadruple[nextInstr].addr2=(char*)addr2;
+		quadruple[nextInstr].addr3=(char*)addr3;
+		quadruple[nextInstr].label=label;
 		nextInstr++;
 }
 /**
@@ -133,11 +133,11 @@ void genCode(const char*result,const char *addr1,const char *op,const char *addr
     @return void None
 */
 void genCode(const char *result,const char *addr1){
-		tuple[nextInstr].result = (char*)result;
-		tuple[nextInstr].addr1 = (char*)addr1;
-		tuple[nextInstr].addr2 = NULL;
-		tuple[nextInstr].addr3 = NULL;
-		tuple[nextInstr].label =0;
+		quadruple[nextInstr].result = (char*)result;
+		quadruple[nextInstr].addr1 = (char*)addr1;
+		quadruple[nextInstr].addr2 = NULL;
+		quadruple[nextInstr].addr3 = NULL;
+		quadruple[nextInstr].label =0;
 		nextInstr++;
 }
 /**
@@ -148,10 +148,10 @@ void genCode(const char *result,const char *addr1){
     @return void None
 */
 void genCode(const char *result,int label){
-		tuple[nextInstr].result = (char*)result;
-		tuple[nextInstr].addr1 = NULL;
-		tuple[nextInstr].addr2 = NULL;
-		tuple[nextInstr].addr3 = NULL;
-		tuple[nextInstr].label = label;
+		quadruple[nextInstr].result = (char*)result;
+		quadruple[nextInstr].addr1 = NULL;
+		quadruple[nextInstr].addr2 = NULL;
+		quadruple[nextInstr].addr3 = NULL;
+		quadruple[nextInstr].label = label;
 		nextInstr++;
 }

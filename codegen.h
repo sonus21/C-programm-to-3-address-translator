@@ -14,7 +14,7 @@ struct Quadruple{
 	char *addr3;  // address 3
 	int  label;   //jump instuction number
 };
-Quadruple tuple[5000];
+Quadruple quadruple[5000];
 char* newTemp();
 void printCode();
 void genCode(const char*result,const char *addr1,const char *op,const char *addr2,const char *addr3,int label);

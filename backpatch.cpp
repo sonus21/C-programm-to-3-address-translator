@@ -42,7 +42,7 @@ void backpatch(patchList *p,int i){
     patchList *t = p;
     patchList *t2;
     while(t!=NULL){
-        tuple[t->ins].label = i;
+        quadruple[t->ins].label = i;
         t2=t;
         t=t->next;
         delete t2;

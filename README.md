@@ -1,5 +1,6 @@
 # C-programm-to-3-address-translator
   <h3><b>It takes a subset of C programming language and generates intermediate (3 address)  code .</b></h3>
+
 ### Subset of C programming language is defined as below
 		 Binary Operators: + , - , * , / ,exponentiation operator (denote it as @) 
 		 Data types:  int , unsigned , signed , bool , float 
@@ -10,6 +11,7 @@
 		 Unary opeartors : + , - 
 		 Postfix / Prefix Operators : ++ , -- 
 		 Identifiers:Simple identifiers without special characters (starts with alphabet)
+		 
 ##### Control Structures:
 		 Assignment Statement 
 	 	 Expressions: 
